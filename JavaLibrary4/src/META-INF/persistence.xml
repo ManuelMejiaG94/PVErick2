@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="BDPuntoVentaManuelPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>BDPuntoVentaManuel.MODEL.PerfilModuloAccion</class>
+    <class>BDPuntoVentaManuel.MODEL.Modulo</class>
+    <class>BDPuntoVentaManuel.MODEL.DireccionPersona</class>
+    <class>BDPuntoVentaManuel.MODEL.Pedido</class>
+    <class>BDPuntoVentaManuel.MODEL.Usuario</class>
+    <class>BDPuntoVentaManuel.MODEL.Provedor</class>
+    <class>BDPuntoVentaManuel.MODEL.Catsexo</class>
+    <class>BDPuntoVentaManuel.MODEL.Contacto</class>
+    <class>BDPuntoVentaManuel.MODEL.Pago</class>
+    <class>BDPuntoVentaManuel.MODEL.Catcategoria</class>
+    <class>BDPuntoVentaManuel.MODEL.Perfil</class>
+    <class>BDPuntoVentaManuel.MODEL.PedidoProducto</class>
+    <class>BDPuntoVentaManuel.MODEL.Producto</class>
+    <class>BDPuntoVentaManuel.MODEL.Catestatuspago</class>
+    <class>BDPuntoVentaManuel.MODEL.Persona</class>
+    <class>BDPuntoVentaManuel.MODEL.DireccionProvedor</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mmgpv?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.password" value="MMG19941107"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>
