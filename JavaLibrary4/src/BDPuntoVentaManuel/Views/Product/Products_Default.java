@@ -53,13 +53,13 @@ public class Products_Default extends javax.swing.JPanel {
 
     public void ResetDataTable()
     {
-        if(this.idCategoria>0 || this.idCategoria != -1)
+        if(categoria !=null && categoria.getId()>0)
         {
             this.SetModelTable();
-            Products_Start.ProductsProcess.ChargeDataDefault(modelTab);
+            Products_Start.ProductsProcess.ChargeDataByCategoriaId(modelTab, categoria);
             this.tbData.setModel(modelTab);
         }
-        if(this.idCategoria==0 || this.idCategoria==-1)
+        if(categoria==null || categoria.getId()<=0)
         {
             this.SetModelTable();
             Products_Start.ProductsProcess.ChargeDataDefault(modelTab);
@@ -161,8 +161,7 @@ public class Products_Default extends javax.swing.JPanel {
     private void cmbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCategoriaItemStateChanged
         if(evt.getStateChange()==ItemEvent.SELECTED)
         {
-            Catcategoria cat=(Catcategoria) this.cmbCategoria.getSelectedItem();
-            this.idCategoria=cat.getId();
+            categoria =(Catcategoria) this.cmbCategoria.getSelectedItem();
             this.ResetDataTable();
         }
     }//GEN-LAST:event_cmbCategoriaItemStateChanged
@@ -189,5 +188,5 @@ public class Products_Default extends javax.swing.JPanel {
     
     //Variables
     private DefaultTableModel modelTab;
-    private int idCategoria=0;
+    private Catcategoria categoria=null;
 }

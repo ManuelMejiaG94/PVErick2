@@ -6,7 +6,9 @@
 package BDPuntoVentaManuel.Views.Product;
 
 
+import BDPuntoVentaManuel.MODEL.Producto;
 import com.mysql.jdbc.StringUtils;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -133,6 +135,9 @@ public class Products_Select_Innabilit extends javax.swing.JPanel {
             if(!StringUtils.isNullOrEmpty(this.txtCodigo.getText()))
             {   
                 String Codigo=txtCodigo.getText().trim();
+                Producto item=Products_Start.ProductsProcess.GetProductByCode(Codigo);
+                JOptionPane.showMessageDialog(null,"Nombre "+item.getStrNombre());
+                
 //                if(this.ctrlProducto.Validate_NotExist_Product(Codigo))
 //                {
                     Products_Start.viewProduct.Open_Windows_Update(Codigo);

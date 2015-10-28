@@ -6,8 +6,12 @@
 package BDPuntoVentaManuel.CONCREATE.Extends;
 
 import BDPuntoVentaManuel.CONCREATE.ExtendsAbstracts.IProductExtends;
+import BDPuntoVentaManuel.FACTORY.FactoryProducto;
 import BDPuntoVentaManuel.MODEL.Producto;
+import BDPuntoVentaManuel.MODEL.Catcategoria;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -62,5 +66,34 @@ public class ProductoJpaControllerExtends implements IProductExtends {
             }
     }
     
+    @Override
+    public List<Producto> FindDataByCategoriaId(Catcategoria categoria)
+    {
+        try{
+            EntityManager em = getEntityManager();
+            List<Producto>  products=em.createQuery("SELECT p FROM Producto p WHERE p.idCategoria= :categoriaId")
+                    .setParameter("categoriaId",categoria).getResultList();
+            
+            em.close();
+            return products;
+        }catch(Exception e)
+        {
+            Logger.getLogger(FactoryProducto.class.getName()).log(Level.SEVERE, null, e);
+            return null;
+        }
+    }
     
+    @Override
+    public Producto findProductByCode(String strClave) {
+         try {
+            EntityManager enm = getEntityManager();
+
+            Producto product = (Producto) enm.createQuery("SELECT p FROM Producto p WHERE p.strClave = :strClave")
+                    .setParameter("strClave", strClave).getSingleResult();
+            return product;
+        } catch (Exception ex) {
+            System.out.println("Error "+ex.getMessage());
+            return null;
+            }
+    }
 }

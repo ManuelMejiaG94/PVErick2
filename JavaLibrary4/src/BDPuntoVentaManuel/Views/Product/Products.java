@@ -7,9 +7,9 @@ package BDPuntoVentaManuel.Views.Product;
 
 
 import BDPuntoVentaManuel.ABSTRACT.IProducto;
-import BDPuntoVentaManuel.CONCREATE.Extends.ProductoJpaControllerExtends;
 import BDPuntoVentaManuel.CONCREATE.ExtendsAbstracts.IProductExtends;
 import BDPuntoVentaManuel.FACTORY.FactoryProducto;
+import BDPuntoVentaManuel.MODEL.Catcategoria;
 import BDPuntoVentaManuel.MODEL.Producto;
 import BDPuntoVentaManuel.ViewsProcess.Process_CatCategoria;
 import java.util.List;
@@ -31,7 +31,7 @@ public class Products {
     {
         CategoriasProcess=new Process_CatCategoria();
         ctrlProducto=new FactoryProducto().getInstanceAbstractExtends();
-        ctrProductoDefault=new FactoryProducto().getInstanceAbstract();
+        ctrlProductoDefault=new FactoryProducto().getInstanceAbstract();
     }
     public DefaultComboBoxModel getModelCategorias()
     {
@@ -57,21 +57,38 @@ public class Products {
     }
     public void SaveProduct(Producto product)
     {
-        ctrProductoDefault.create(product);
+        ctrlProductoDefault.create(product);
     }
-//    public Producto SearchProductByFirstLeter()
-//    {
-//    
-//    }
-//    
+     public void ChargeDataByCategoriaId(DefaultTableModel model,Catcategoria categoria)
+    {
+        List<Producto> listProducts=ctrlProducto.FindDataByCategoriaId(categoria);
+        Object []data=new Object[5];
+        
+        for(Producto item : listProducts)
+        {
+            data[0]=item.getStrClave();
+            data[1]=item.getStrNombre();
+            data[2]=item.getDobPrecioCompra();
+            data[3]=item.getDobPrecioVenta();
+            data[4]=item.getDobCantidad();
+            
+            model.addRow(data);
+        }
+        
+    }
     
     
-    
+     public Producto GetProductByCode(String code)
+     {
+         Producto item=ctrlProducto.findProductByCode(code);
+         return item;
+     }
+     
     //Variables de procesos
     Process_CatCategoria CategoriasProcess;
     
     //Controlers
-    IProducto ctrProductoDefault;
+    IProducto ctrlProductoDefault;
     IProductExtends ctrlProducto;
     
 }

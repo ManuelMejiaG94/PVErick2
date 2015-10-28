@@ -5,6 +5,7 @@
  */
 package BDPuntoVentaManuel.CONCREATE.ExtendsAbstracts;
 
+import BDPuntoVentaManuel.MODEL.Catcategoria;
 import BDPuntoVentaManuel.MODEL.Producto;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,8 +17,10 @@ import javax.persistence.EntityManager;
 public interface IProductExtends {
 
     List<Producto> findDatadefault();
-    List<Producto>  FindDataByFirstLetter(String leter);
+    List<Producto> FindDataByFirstLetter(String leter);
+    List<Producto> FindDataByCategoriaId(Catcategoria categoria);
 
     EntityManager getEntityManager();
+    Producto findProductByCode(String strClave);
     
 }
