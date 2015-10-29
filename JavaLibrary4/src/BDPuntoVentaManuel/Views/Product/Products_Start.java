@@ -22,50 +22,45 @@ public class Products_Start extends javax.swing.JInternalFrame {
         this.btnInabilit.setVisible(false);
         this.Start_Windows();
     }
-    private void Start_Windows()
-    {
+
+    private void Start_Windows() {
         this.Start_Connections();
         this.Close_Views();
         this.Open_COnfigVindowsDefault();
     }
 
-    
-    private void Start_Connections()
-    {
-        viewProduct=new Products_New_Update();
-        viewSelect=new Products_Select_Innabilit();
-        viewDefault=new Products_Default();
-        
-        pnContainer.setLayout(Layout);
-        GridBagConstraints cons= new GridBagConstraints();
-        
-        cons.gridx=0;
-        cons.gridy=0;
-        pnContainer.add(viewProduct,cons);
-        
-        cons.gridx=0;
-        cons.gridy=0;
-        pnContainer.add(viewSelect,cons);
+    private void Start_Connections() {
+        viewProduct = new Products_New_Update();
+        viewSelect = new Products_Select_Innabilit();
+        viewDefault = new Products_Default();
 
-        pnContainer.add(viewDefault,cons);
+        pnContainer.setLayout(Layout);
+        GridBagConstraints cons = new GridBagConstraints();
+
+        cons.gridx = 0;
+        cons.gridy = 0;
+        pnContainer.add(viewProduct, cons);
+
+        cons.gridx = 0;
+        cons.gridy = 0;
+        pnContainer.add(viewSelect, cons);
+
+        pnContainer.add(viewDefault, cons);
 
     }
-    
-    private void Open_COnfigVindowsDefault()
-    {
-         viewProduct.setVisible(false);
+
+    private void Open_COnfigVindowsDefault() {
+        viewProduct.setVisible(false);
         viewSelect.setVisible(false);
         viewDefault.setVisible(true);
     }
-    
-    private void Close_Views()
-    {
+
+    private void Close_Views() {
         viewProduct.setVisible(false);
         viewSelect.setVisible(true);
         this.viewDefault.setVisible(false);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -233,15 +228,14 @@ public class Products_Start extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnContainer;
     // End of variables declaration//GEN-END:variables
 
-
     //Vistas del proceso
     public static Products_New_Update viewProduct;
     public static Products_Select_Innabilit viewSelect;
     public static Products_Default viewDefault;
-    
+
     //Variables
-    GridBagLayout Layout=new GridBagLayout();
-    
+    GridBagLayout Layout = new GridBagLayout();
+
     //Variable de los procesos de la vista
     public static Products ProductsProcess;
 

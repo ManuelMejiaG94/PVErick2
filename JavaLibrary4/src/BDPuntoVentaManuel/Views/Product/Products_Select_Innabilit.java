@@ -21,28 +21,25 @@ public class Products_Select_Innabilit extends javax.swing.JPanel {
      */
     public Products_Select_Innabilit() {
         initComponents();
-        
     }
-    public void Open_Update()
-    {
+
+    public void Open_Update() {
         this.btnProcess.setText("Siguiente");
-//        this.ctrlProducto=new Controller_Producto();
+
         this.Clean_Windows();
         this.setVisible(true);
     }
-    
-    private void Clean_Windows()
-    {
+
+    private void Clean_Windows() {
         this.txtCodigo.setText(null);
-        
+
         this.lbErro1.setVisible(false);
         this.lbErrorMessage.setVisible(false);
     }
-    
-    private void Paint_ErrorMessage(String MEssage)
-    {
+
+    private void Paint_ErrorMessage(String MEssage) {
         this.lbErro1.setVisible(true);
-        
+
         this.lbErrorMessage.setText(MEssage);
         this.lbErrorMessage.setVisible(true);
     }
@@ -128,36 +125,31 @@ public class Products_Select_Innabilit extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
-        if(btnProcess.getText().equals("Siguiente"))
-        {
-            if(!StringUtils.isNullOrEmpty(this.txtCodigo.getText()))
-            {   
-                String Codigo=txtCodigo.getText().trim();
-                Producto item=Products_Start.ProductsProcess.GetProductByCode(Codigo);
+        if (btnProcess.getText().equals("Siguiente")) {
+            if (!StringUtils.isNullOrEmpty(this.txtCodigo.getText())) {
+                String Codigo = txtCodigo.getText().trim();
+                Producto item = Products_Start.ProductsProcess.GetProductByCode(Codigo);
 
-                if(item != null)
-                {
+                if (item != null) {
                     Products_Start.viewProduct.Open_Windows_Update(item);
                     Products_Start.viewSelect.setVisible(false);
                     Products_Start.viewDefault.setVisible(false);
-                
-                }else{
+
+                } else {
                     this.Paint_ErrorMessage("No existe en tu repletorio un producto con el codigo ingresado");
                 }
-            
-            
-            }else
-            {
+
+            } else {
                 this.Paint_ErrorMessage("Es necesario ingresar el codigo del producto");
             }
-            
+
         }
     }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-                Products_Start.viewProduct.setVisible(false);
-                Products_Start.viewSelect.setVisible(false);
-                Products_Start.viewDefault.setVisible(true);
+        Products_Start.viewProduct.setVisible(false);
+        Products_Start.viewSelect.setVisible(false);
+        Products_Start.viewDefault.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
@@ -169,11 +161,5 @@ public class Products_Select_Innabilit extends javax.swing.JPanel {
     private javax.swing.JLabel lbErrorMessage;
     private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
-
-
-    //Controlador
-    
-   
-    
 
 }

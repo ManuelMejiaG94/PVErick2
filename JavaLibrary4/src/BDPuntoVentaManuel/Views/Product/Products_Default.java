@@ -208,10 +208,6 @@ public class Products_Default extends javax.swing.JPanel {
     private javax.swing.JTable tbData;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-
-
-    //Controlador
-    //IProducto factoryProduct=new FactoryProducto()
     
     //Variables
     private DefaultTableModel modelTab;

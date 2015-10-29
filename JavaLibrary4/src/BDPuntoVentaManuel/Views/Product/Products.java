@@ -23,70 +23,62 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Products {
     
-    
-     public Products()
-    {
+        public Products() {
         this.start_tools();
     }
-    private void start_tools()
-    {
-        CategoriasProcess=new Process_CatCategoria();
-        ctrlProducto=new FactoryProducto().getInstanceAbstractExtends();
-        ctrlProductoDefault=new FactoryProducto().getInstanceAbstract();
+
+    private void start_tools() {
+        CategoriasProcess = new Process_CatCategoria();
+        ctrlProducto = new FactoryProducto().getInstanceAbstractExtends();
+        ctrlProductoDefault = new FactoryProducto().getInstanceAbstract();
     }
-    public DefaultComboBoxModel getModelCategorias()
-    {
+
+    public DefaultComboBoxModel getModelCategorias() {
         return CategoriasProcess.GetComoBoxModelCategoria();
     }
-    public void ChargeDataDefault(DefaultTableModel model)
-    {
-        List<Producto> listProducts=ctrlProducto.findDatadefault();
-        Object []data=new Object[5];
-        
-        
-        for(Producto item : listProducts)
-        {
-            data[0]=item.getStrClave();
-            data[1]=item.getStrNombre();
-            data[2]=item.getDobPrecioCompra();
-            data[3]=item.getDobPrecioVenta();
-            data[4]=item.getDobCantidad();
-            
+
+    public void ChargeDataDefault(DefaultTableModel model) {
+        List<Producto> listProducts = ctrlProducto.findDatadefault();
+        Object[] data = new Object[5];
+
+        for (Producto item : listProducts) {
+            data[0] = item.getStrClave();
+            data[1] = item.getStrNombre();
+            data[2] = item.getDobPrecioCompra();
+            data[3] = item.getDobPrecioVenta();
+            data[4] = item.getDobCantidad();
+
             model.addRow(data);
         }
-        
+
     }
-    public void SaveProduct(Producto product)
-    {
+
+    public void SaveProduct(Producto product) {
         ctrlProductoDefault.create(product);
     }
-     public void ChargeDataByCategoriaId(DefaultTableModel model,Catcategoria categoria)
-    {
-        List<Producto> listProducts=ctrlProducto.FindDataByCategoriaId(categoria);
-        Object []data=new Object[5];
-        
-        for(Producto item : listProducts)
-        {
-            data[0]=item.getStrClave();
-            data[1]=item.getStrNombre();
-            data[2]=item.getDobPrecioCompra();
-            data[3]=item.getDobPrecioVenta();
-            data[4]=item.getDobCantidad();
-            
+
+    public void ChargeDataByCategoriaId(DefaultTableModel model, Catcategoria categoria) {
+        List<Producto> listProducts = ctrlProducto.FindDataByCategoriaId(categoria);
+        Object[] data = new Object[5];
+
+        for (Producto item : listProducts) {
+            data[0] = item.getStrClave();
+            data[1] = item.getStrNombre();
+            data[2] = item.getDobPrecioCompra();
+            data[3] = item.getDobPrecioVenta();
+            data[4] = item.getDobCantidad();
+
             model.addRow(data);
         }
-        
+
     }
-    
-    
-     public Producto GetProductByCode(String code)
-     {
-         Producto item=ctrlProducto.findProductByCode(code);
-         return item;
-     }
-     
-     public String SearchProductByLette(String letter, DefaultTableModel model) 
-     {
+
+    public Producto GetProductByCode(String code) {
+        Producto item = ctrlProducto.findProductByCode(code);
+        return item;
+    }
+
+    public String SearchProductByLette(String letter, DefaultTableModel model) {
         String result = null;
 
         List<Producto> listProducts = ctrlProducto.FindDataByFirstLetter(letter);
@@ -108,25 +100,21 @@ public class Products {
         return result;
     }
 
-     public String EditProduct(Producto product)
-     {
-         String result=null;
-         try
-         {
+    public String EditProduct(Producto product) {
+        String result = null;
+        try {
             ctrlProductoDefault.edit(product);
-         }catch(Exception ex)
-         {
-             result="Excepcion generada "+ex.getMessage();
-         }
-         return result;
-     }
-     
-     
+        } catch (Exception ex) {
+            result = "Excepcion generada " + ex.getMessage();
+        }
+        return result;
+    }
+
     //Variables de procesos
     Process_CatCategoria CategoriasProcess;
-    
+
     //Controlers
     IProducto ctrlProductoDefault;
     IProductExtends ctrlProducto;
-    
+
 }
