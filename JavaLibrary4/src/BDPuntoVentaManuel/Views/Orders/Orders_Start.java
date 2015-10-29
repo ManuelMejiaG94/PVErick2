@@ -31,6 +31,9 @@ public class Orders_Start extends javax.swing.JInternalFrame {
 
     private void Start_Connections()
     {
+        System.out.println("Inicializado");
+        OrdersProcess=new Orders();
+        
         viewOrders=new Orders_New_Update();
         viewSelect=new Orders_Select_Cancel();
         viewDefault=new Orders_Default();
@@ -46,9 +49,7 @@ public class Orders_Start extends javax.swing.JInternalFrame {
         pnContainer.add(viewSelect,cons);
         pnContainer.add(viewDefault,cons);
         pnContainer.add(viewProcess,cons);
-        
-        OrdersProcess=new Orders();
-        
+
     }
     
     private void Open_COnfigVindowsDefault()

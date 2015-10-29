@@ -28,8 +28,6 @@ public class Orders {
         return CategoriasProcess.GetComoBoxModelCategoria();
     }
     
-    
-    
     //Variables
     Process_CatCategoria CategoriasProcess;
 }
