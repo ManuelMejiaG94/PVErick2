@@ -14,6 +14,7 @@ import BDPuntoVentaManuel.MODEL.Producto;
 import BDPuntoVentaManuel.ViewsProcess.Process_CatCategoria;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -83,6 +84,43 @@ public class Products {
          Producto item=ctrlProducto.findProductByCode(code);
          return item;
      }
+     
+     public String SearchProductByLette(String letter, DefaultTableModel model) 
+     {
+        String result = null;
+
+        List<Producto> listProducts = ctrlProducto.FindDataByFirstLetter(letter);
+        Object[] data = new Object[5];
+
+        if (listProducts.size() > 0) {
+            for (Producto item : listProducts) {
+                data[0] = item.getStrClave();
+                data[1] = item.getStrNombre();
+                data[2] = item.getDobPrecioCompra();
+                data[3] = item.getDobPrecioVenta();
+                data[4] = item.getDobCantidad();
+
+                model.addRow(data);
+            }
+        } else {
+            result = "No se encontraron datos con el nombre ingresado";
+        }
+        return result;
+    }
+
+     public String EditProduct(Producto product)
+     {
+         String result=null;
+         try
+         {
+            ctrlProductoDefault.edit(product);
+         }catch(Exception ex)
+         {
+             result="Excepcion generada "+ex.getMessage();
+         }
+         return result;
+     }
+     
      
     //Variables de procesos
     Process_CatCategoria CategoriasProcess;

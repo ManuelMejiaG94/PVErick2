@@ -7,6 +7,7 @@ package BDPuntoVentaManuel.Views.Product;
 
 
 import BDPuntoVentaManuel.MODEL.Catcategoria;
+import com.mysql.jdbc.StringUtils;
 import java.awt.event.ItemEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -65,6 +66,24 @@ public class Products_Default extends javax.swing.JPanel {
             Products_Start.ProductsProcess.ChargeDataDefault(modelTab);
             this.tbData.setModel(modelTab);
         }
+    }
+    
+    private void ResetDataTableBySearch()
+    {
+            this.SetModelTable();
+            Products_Start.ProductsProcess.SearchProductByLette(this.txtNombre.getText().trim(),
+                    modelTab);
+            this.tbData.setModel(modelTab);
+    }
+    
+    private void PainErrorMessage()
+    {
+        this.lbErrorMEssage.setText("Es necesario llenar el campo nombre");
+        this.lbErrorMEssage.setVisible(true);
+    }
+    private void CleanErrorMessage()
+    {
+        this.lbErrorMEssage.setVisible(false);
     }
     
     /**
@@ -167,7 +186,15 @@ public class Products_Default extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbCategoriaItemStateChanged
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        String result;
+        if(!StringUtils.isNullOrEmpty(this.txtNombre.getText()))
+        {
+            CleanErrorMessage();
+            ResetDataTableBySearch();
+        }else
+        {
+            PainErrorMessage();
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
 

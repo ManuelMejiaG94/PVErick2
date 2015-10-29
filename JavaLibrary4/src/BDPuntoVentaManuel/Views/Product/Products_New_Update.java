@@ -22,65 +22,54 @@ public class Products_New_Update extends javax.swing.JPanel {
      */
     public Products_New_Update() {
         initComponents();
-//        ctrlProducto=new Controller_Producto();
     }
-    public void Open_Windows_New(boolean open)
-    {
+
+    public void Open_Windows_New(boolean open) {
         this.btnProcess.setText("Registrar");
         this.Clean_Windows();
         this.Charge_Default_Data();
-        
+
         this.setVisible(open);
     }
-    
-    public void Open_Windows_Update(String strCodigo)
-    {
+
+    public void Open_Windows_Update(Producto _product) {
         this.btnProcess.setText("Modificar");
         this.Clean_Windows();
         this.Charge_Default_Data();
-        
-        this.Charge_Product_Modific(strCodigo);
-        
+
+        this.Charge_Product_Modific(_product);
+
         this.setVisible(true);
     }
-    
-    private void Charge_Product_Modific(String strCodigo)
-    {
-//        Object data[] =this.ctrlProducto.getProduct_DataByCode(strCodigo);
-        
 
-//        this.idProduct=Integer.parseInt(data[0].toString());
-//        this.txtCodigo.setText(data[1].toString());
-//        this.txtCodigo.setEnabled(false);
-//
-//        this.txtName.setText(data[2].toString());
-//        this.txtStock.setText(data[3].toString());
-//        this.txtPrecent.setText(data[4].toString());
-//        this.txtPC.setText(data[5].toString());
-//        this.txtPV.setText(data[6].toString());
-//        this.idCategoria=Integer.parseInt(data[7].toString());
-//        this.cmbCategories.setModel(this.ctrlProducto.getAllCategories());
-        
-//        this.cmbCategories.setSelectedIndex(Integer.parseInt(data[7].toString()));
-        //this.cmbCategories.setEnabled(false);
-                
-        
-        
+    private void Charge_Product_Modific(Producto _product) {
+        product = _product;
+
+        this.txtCodigo.setText(product.getStrClave());
+        this.txtCodigo.setEnabled(false);
+
+        this.txtName.setText(product.getStrNombre());
+        this.txtStock.setText(product.getDobCantidad().toString());
+        this.txtPrecent.setText(product.getStrPresentacion());
+        this.txtPC.setText(product.getDobPrecioCompra().toString());
+        this.txtPV.setText(product.getDobPrecioVenta().toString());
+        this.cmbCategories.setModel(Products_Start.ProductsProcess.getModelCategorias());
+
+        this.cmbCategories.setSelectedItem(product.getIdCategoria());
+        this.cmbCategories.setEnabled(false);
     }
-    
-    public void Charge_Default_Data()
-    {
+
+    public void Charge_Default_Data() {
         this.cmbCategories.setModel(Products_Start.ProductsProcess.getModelCategorias());
     }
-    
-    private void Clean_Windows()
-    {
+
+    private void Clean_Windows() {
         this.txtStock.setText(null);
         this.txtName.setText(null);
         this.txtPC.setText(null);
         this.txtPV.setText(null);
         this.txtCodigo.setText(null);
-        
+
         this.lbError1.setVisible(false);
         this.lbError2.setVisible(false);
         this.lbError3.setVisible(false);
@@ -88,75 +77,63 @@ public class Products_New_Update extends javax.swing.JPanel {
         this.lbError5.setVisible(false);
         this.lbError6.setVisible(false);
         this.lbError7.setVisible(false);
-        
+
         this.ErrorsMessage.setVisible(false);
     }
-    
-    private boolean Validate_Data()
-    {
-        this.ListErros=new Vector();
-        
-        boolean Result=true;
-        if(StringUtils.isNullOrEmpty(this.txtCodigo.getText()))
-        {   
+
+    private boolean Validate_Data() {
+        this.ListErros = new Vector();
+
+        boolean Result = true;
+        if (StringUtils.isNullOrEmpty(this.txtCodigo.getText())) {
             this.lbError1.setVisible(true);
-            Result=false;
+            Result = false;
         }
-        if(StringUtils.isNullOrEmpty(this.txtName.getText()))
-        {   
+        if (StringUtils.isNullOrEmpty(this.txtName.getText())) {
             this.lbError2.setVisible(true);
-            Result=false;
+            Result = false;
         }
-        if(StringUtils.isNullOrEmpty(this.txtStock.getText()))
-        {   
+        if (StringUtils.isNullOrEmpty(this.txtStock.getText())) {
             this.lbError3.setVisible(true);
-            Result=false;
+            Result = false;
         }
-        if(StringUtils.isNullOrEmpty(this.txtPrecent.getText()))
-        {   
+        if (StringUtils.isNullOrEmpty(this.txtPrecent.getText())) {
             this.lbError4.setVisible(true);
-            Result=false;
+            Result = false;
         }
-        if(StringUtils.isNullOrEmpty(this.txtPC.getText()))
-        {   
+        if (StringUtils.isNullOrEmpty(this.txtPC.getText())) {
             this.lbError5.setVisible(true);
-            Result=false;
+            Result = false;
         }
-        if(StringUtils.isNullOrEmpty(this.txtPV.getText()))
-        {   
+        if (StringUtils.isNullOrEmpty(this.txtPV.getText())) {
             this.lbError6.setVisible(true);
-            Result=false;
+            Result = false;
         }
-        
-        if(!Result)
-        {
-            String error="Los campos marcados con * son obligatorios";
+
+        if (!Result) {
+            String error = "Los campos marcados con * son obligatorios";
             this.ListErros.add(error);
         }
-        
-        if(this.cmbCategories.getSelectedIndex()<=0)
-        {
-            String error="Es necesario indicar una categoria";
-            
+
+        if (this.cmbCategories.getSelectedIndex() <= 0) {
+            String error = "Es necesario indicar una categoria";
+
             this.ListErros.add(error);
             this.lbError7.setVisible(true);
-            Result=false;
+            Result = false;
         }
-        
-        
+
         return Result;
     }
 
-     private void ErrorsPaint()
-    {
+    private void ErrorsPaint() {
         this.ErrorsMessage.setListData(this.ListErros);
         this.ErrorsMessage.setVisible(true);
-        this.VisitErrors=true;
-        
+        this.VisitErrors = true;
+
     }
-     
-    private void Clear_Erros()
-    {
+
+    private void Clear_Erros() {
         this.lbError1.setVisible(false);
         this.lbError2.setVisible(false);
         this.lbError3.setVisible(false);
@@ -164,34 +141,47 @@ public class Products_New_Update extends javax.swing.JPanel {
         this.lbError5.setVisible(false);
         this.lbError6.setVisible(false);
         this.lbError7.setVisible(false);
-        
+
         this.ErrorsMessage.setVisible(false);
     }
-    
-     private void PaintErrorExistenProduct() {
-         
-        String error="El producto con el codigo dado ya exite en tu repletorio";
+
+    private void PaintErrorExistenProduct() {
+
+        String error = "El producto con el codigo dado ya exite en tu repletorio";
         this.ListErros.add(error);
         this.lbError1.setVisible(true);
 
         this.ErrorsPaint();
     }
-     
-     private Producto GetProducto()
-     {
-         Producto item=new Producto();
-         item.setStrClave(this.txtCodigo.getText().trim());
-         item.setStrNombre(this.txtName.getText().trim());
-         item.setStrPresentacion(this.txtPrecent.getText().trim());
-         item.setDobCantidad(Double.parseDouble(this.txtStock.getText().trim()));
-         item.setDobPrecioCompra(Double.parseDouble(this.txtPC.getText().trim()));
-         item.setDobPrecioVenta(Double.parseDouble(this.txtPV.getText().trim()));
-         item.setIdCategoria(this.categoriaProduct);
-         item.setBitEstatus(true);
-         
-         return item;
-     }
-     
+
+    private Producto GetProductoNew() {
+        product = new Producto();
+        product.setStrClave(this.txtCodigo.getText().trim());
+        product.setStrNombre(this.txtName.getText().trim());
+        product.setStrPresentacion(this.txtPrecent.getText().trim());
+        product.setDobCantidad(Double.parseDouble(this.txtStock.getText().trim()));
+        product.setDobPrecioCompra(Double.parseDouble(this.txtPC.getText().trim()));
+        product.setDobPrecioVenta(Double.parseDouble(this.txtPV.getText().trim()));
+        product.setIdCategoria(this.categoriaProduct);
+        product.setBitEstatus(true);
+
+        return product;
+    }
+
+    private Producto GetProductoForUpdate() {
+
+        product.setStrClave(this.txtCodigo.getText().trim());
+        product.setStrNombre(this.txtName.getText().trim());
+        product.setStrPresentacion(this.txtPrecent.getText().trim());
+        product.setDobCantidad(Double.parseDouble(this.txtStock.getText().trim()));
+        product.setDobPrecioCompra(Double.parseDouble(this.txtPC.getText().trim()));
+        product.setDobPrecioVenta(Double.parseDouble(this.txtPV.getText().trim()));
+        product.setIdCategoria(this.categoriaProduct);
+        product.setBitEstatus(true);
+
+        return product;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -328,7 +318,7 @@ public class Products_New_Update extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -337,7 +327,7 @@ public class Products_New_Update extends javax.swing.JPanel {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                        .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbError1)
                             .addComponent(lbError2)
@@ -378,7 +368,7 @@ public class Products_New_Update extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(239, 239, 239)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,69 +412,48 @@ public class Products_New_Update extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
-        if(this.VisitErrors)
-        {
+        if (this.VisitErrors) {
             this.Clear_Erros();
         }
-        if(btnProcess.getText().equals("Registrar"))
-        {
-            if(this.Validate_Data())
-            {
-                Products_Start.ProductsProcess.SaveProduct(this.GetProducto());
-                //String Codigo=txtCodigo.getText().trim();
-//                if(this.ctrlProducto.Validate_Exist_Product(Codigo))
-//                {
-//                    //System.out.println("categoriaaaaaaaaaaaaaaaaaaaaaaaaaaa "+this.idCategoria);
-//                    Object Obj=this.ctrlProducto.Model_Product(0, this.txtCodigo.getText().trim(), this.txtName.getText().trim(),
-//                            Integer.parseInt(this.txtStock.getText().trim()),this.txtPrecent.getText().trim(),Double.parseDouble(this.txtPC.getText().trim()),
-//                            Double.parseDouble(this.txtPV.getText().trim()),this.idCategoria,1);
-//                    
-//                    this.ctrlProducto.InsertProduct(Obj);
-//                    this.Clean_Windows();
+        if (btnProcess.getText().equals("Registrar")) {
+            if (this.Validate_Data()) {
+                String Codigo = txtCodigo.getText().trim();
+                Producto item = Products_Start.ProductsProcess.GetProductByCode(Codigo);
+                if (item == null) {
+                    Products_Start.ProductsProcess.SaveProduct(this.GetProductoNew());
+                    this.Clean_Windows();
                     this.setVisible(false);
-                    
+
                     Products_Start.viewDefault.ResetDataTable();
                     Products_Start.viewDefault.setVisible(true);
-                    
-                    
-                    
-//                }else
-//                {
-//                    this.PaintErrorExistenProduct();
-//                }
-            }else{
-                
+                } else {
+                    this.PaintErrorExistenProduct();
+                }
+            } else {
+
                 this.ErrorsPaint();
             }
         }
-        if(btnProcess.getText().equals("Modificar"))
-            {
-                
-                if(this.Validate_Data())
-                {
-                
-//                    Object Obj=this.ctrlProducto.Model_Product(this.idProduct, this.txtCodigo.getText().trim(), this.txtName.getText().trim(),
-//                            Integer.parseInt(this.txtStock.getText().trim()),this.txtPrecent.getText().trim(),Double.parseDouble(this.txtPC.getText().trim()),
-//                            Double.parseDouble(this.txtPV.getText().trim()),this.idCategoria,1);
-//                    
-//                    
-//                    
-//                    this.ctrlProducto.UpdateProduct(Obj);
+        if (btnProcess.getText().equals("Modificar")) {
+            String result;
+            if (this.Validate_Data()) {
+                result = Products_Start.ProductsProcess.EditProduct(GetProductoForUpdate());
+                if (result == null) {
                     this.setVisible(false);
-                    
                     Products_Start.viewDefault.ResetDataTable();
                     Products_Start.viewDefault.setVisible(true);
-                    
-                    
-                }else{
-                
+                } else {
+                    this.ListErros.add(result);
+                }
+
+            } else {
                 this.ErrorsPaint();
             }
-            }
+        }
     }//GEN-LAST:event_btnProcessActionPerformed
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
-        if (txtCodigo.getText().length()== 25)
+        if (txtCodigo.getText().length()== 15)
         {
             evt.consume();
         }
@@ -504,7 +473,7 @@ public class Products_New_Update extends javax.swing.JPanel {
     }//GEN-LAST:event_txtStockKeyTyped
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
-           if (txtName.getText().length()== 25)
+        if (txtName.getText().length()== 25)
         {
             evt.consume();
         }
@@ -543,7 +512,6 @@ public class Products_New_Update extends javax.swing.JPanel {
          if(evt.getStateChange()==ItemEvent.SELECTED)
         {
             this.categoriaProduct=(Catcategoria) this.cmbCategories.getSelectedItem();
-            
         }
     }//GEN-LAST:event_cmbCategoriesItemStateChanged
 
@@ -589,10 +557,6 @@ public class Products_New_Update extends javax.swing.JPanel {
     private boolean VisitErrors=false;
     private Catcategoria categoriaProduct;
     private int idProduct;
-    
-    
-    //Controlador
-    
-    //Procesos
+    private Producto product;
     
 }

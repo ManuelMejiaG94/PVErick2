@@ -26,10 +26,8 @@ public class Products_Select_Innabilit extends javax.swing.JPanel {
     public void Open_Update()
     {
         this.btnProcess.setText("Siguiente");
-        
 //        this.ctrlProducto=new Controller_Producto();
         this.Clean_Windows();
-        
         this.setVisible(true);
     }
     
@@ -136,17 +134,16 @@ public class Products_Select_Innabilit extends javax.swing.JPanel {
             {   
                 String Codigo=txtCodigo.getText().trim();
                 Producto item=Products_Start.ProductsProcess.GetProductByCode(Codigo);
-                JOptionPane.showMessageDialog(null,"Nombre "+item.getStrNombre());
-                
-//                if(this.ctrlProducto.Validate_NotExist_Product(Codigo))
-//                {
-                    Products_Start.viewProduct.Open_Windows_Update(Codigo);
+
+                if(item != null)
+                {
+                    Products_Start.viewProduct.Open_Windows_Update(item);
                     Products_Start.viewSelect.setVisible(false);
                     Products_Start.viewDefault.setVisible(false);
                 
-//                }else{
-//                    this.Paint_ErrorMessage("No existe en tu repletorio un producto con el codigo ingresado");
-//                }
+                }else{
+                    this.Paint_ErrorMessage("No existe en tu repletorio un producto con el codigo ingresado");
+                }
             
             
             }else

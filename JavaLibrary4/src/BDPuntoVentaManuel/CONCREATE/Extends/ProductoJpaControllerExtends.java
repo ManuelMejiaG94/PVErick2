@@ -56,8 +56,8 @@ public class ProductoJpaControllerExtends implements IProductExtends {
             EntityManager enm = getEntityManager();
 
             List<Producto> listAlumno = (List<Producto>) enm.createQuery(
-                    "select p from Producto p LIKE :letter")
-                    .setParameter("letter",letter)
+                    "select p from Producto p wHERE p.strNombre LIKE :letter")
+                    .setParameter("letter","%"+letter+"%")
                     .getResultList();
             return listAlumno;
         } catch (Exception ex) {
